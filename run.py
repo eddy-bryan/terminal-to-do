@@ -12,8 +12,21 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('terminal_to_do')
 
-tasks = SHEET.worksheet('tasks')
 
-data = tasks.get_all_values()
+def display_menu():
+    """
+    Displays a menu of actions the user can select from
+    """
+    print('Welcome to Terminal To Do!')
+    
+    print('_' * 80 + '\n')
 
-print(data)
+    print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Exit')
+
+    print('_' * 80 + '\n')
+
+    action = input("What would you like to do:\n")
+    print(f"You selected '{action}'.")
+
+
+display_menu()
