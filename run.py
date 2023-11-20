@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from datetime import datetime
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -55,10 +56,50 @@ def show_tasks():
         print(f"Due Date: {task[2]}")
 
 
+def is_valid_date(date_str):
+    try:
+        datetime.strptime(date_str, '%d-%m-%Y')
+        return True
+    except ValueError:
+        return False
+
+
 def new_task():
-    task_name = input("Enter the task name:\n")
-    task_description = input("Enter the task description:\n")
-    due_date = input("Enter the due date (format: DD-MM-YYYY):\n")
+    while True:
+        try:
+            task_name = input("Enter the task name:\n")
+
+            if not task_name:
+                raise ValueError("Task name cannot be empty.")
+
+            break
+
+        except ValueError as e:
+            print(f"Error: {e}")
+
+    while True:
+        try:
+            task_description = input("Enter the task description:\n")
+
+            if not task_description:
+                raise ValueError("Task description cannot be empty.")
+
+            break
+
+        except ValueError as e:
+            print(f"Error: {e}")
+
+    while True:
+        try:
+            due_date = input("Enter the due date (format: DD-MM-YYYY):\n")
+
+            if not is_valid_date(due_date):
+                raise ValueError("Invalid date format. Please use DD-MM-YYYY.")
+
+            break
+
+        except ValueError as e:
+            print(f"Error: {e}")
 
     tasks_worksheet = SHEET.worksheet('tasks')
 
