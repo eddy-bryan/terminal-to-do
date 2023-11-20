@@ -30,7 +30,7 @@ def display_menu():
             show_tasks()
         elif action == 'New task':
             print(f"\nYou selected '{action}'.")
-            # new_task()
+            new_task()
         elif action == 'Complete task':
             print(f"\nYou selected '{action}'.")
             # complete_task()
@@ -55,7 +55,18 @@ def show_tasks():
         print(f"Due Date: {task[2]}")
 
 
-# def new_task():
+def new_task():
+    task_name = input("Enter the task name:\n")
+    task_description = input("Enter the task description:\n")
+    due_date = input("Enter the due date (format: DD-MM-YYYY):\n")
+
+    tasks_worksheet = SHEET.worksheet('tasks')
+
+    print("Updating tasks worksheet...")
+
+    tasks_worksheet.append_row([task_name, task_description, due_date])
+
+    print("New task added successfully!")
 
 
 # def complete_task():
