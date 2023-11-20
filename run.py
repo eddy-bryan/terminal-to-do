@@ -20,28 +20,45 @@ def display_menu():
     print('Welcome to Terminal To Do!')
     print('_' * 80 + '\n')
     print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Exit')
-    print('_' * 80 + '\n')
 
     while True:
+        print('_' * 80 + '\n')
         action = input("What would you like to do:\n").capitalize()
 
         if action == 'Show tasks':
-            print(f"You selected '{action}'.")
-            # show_tasks()
+            print(f"\nYou selected '{action}'.")
+            show_tasks()
         elif action == 'New task':
-            print(f"You selected '{action}'.")
-            # new_tasks()
+            print(f"\nYou selected '{action}'.")
+            # new_task()
         elif action == 'Complete task':
-            print(f"You selected '{action}'.")
+            print(f"\nYou selected '{action}'.")
             # complete_task()
         elif action == 'Exit':
-            print("Exiting program...")
+            print("\nExiting program...")
             break
         else:
-            print('Action invalid, please select an option from the "Main menu".')
+            print('\nAction invalid, please select an option from the "Main menu".')
             print('_' * 80 + '\n')
             print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Exit')
-            print('_' * 80 + '\n')
+
+
+def show_tasks():
+    tasks_worksheet = SHEET.worksheet('tasks')
+    all_values = tasks_worksheet.get_all_values()
+    task_data = [row[:3] for row in all_values[1:]]
+
+    for task in task_data:
+        print('_' * 80 + '\n')
+        print(f"Task Name: {task[0]}\n")
+        print(f"Description: {task[1]}\n")
+        print(f"Due Date: {task[2]}")
+
+
+# def new_task():
+
+
+# def complete_task():
 
 
 display_menu()
