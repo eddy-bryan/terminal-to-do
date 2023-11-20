@@ -136,7 +136,7 @@ def get_task_details(worksheet, task_name):
         task_details = None
 
         for row in all_values[1:]:
-            if row[0].lower() == task_name_lower():
+            if row[0].lower() == task_name.lower():
                 task_details = row
                 break
 
@@ -157,6 +157,8 @@ def complete_task():
         tasks_worksheet = SHEET.worksheet('tasks')
         completed_tasks_worksheet = SHEET.worksheet('completed_tasks')
 
+        all_values = tasks_worksheet.get_all_values()
+
         task_name = input("Enter the name of the task you would like to mark as complete (or enter 'cancel' to cancel):\n")
 
         if task_name.lower() == 'cancel':
@@ -168,11 +170,13 @@ def complete_task():
         if task_details:
             print("Updating completed tasks worksheet...")
             completed_tasks_worksheet.append_row(task_details)
+            print("Completed tasks worksheet updated successfully.")
 
             print("Updating tasks worksheet...")
-            tasks_worksheet.delete_row(all_values.index(task_details))
+            tasks_worksheet.delete_rows(all_values.index(task_details))
+            print("Tasks worksheet updated successfully.")
 
-            print(f"Task '{task_name}' marked as complete and moved to completed tasks.")
+            print(f"\nTask '{task_name}' marked as complete and moved to completed tasks.")
     
     except ValueError as e:
         print(f"Error: {e}")

@@ -46,3 +46,6 @@ used date method from the datetime module to check if parsed_date is in past ten
 no way of exiting or cancelling when not in main menu
 
 multiple tasks can be added with the same task name
+added additional validation step to check if a task already exists with the same name before allowing the user to create a new task
+
+tasks are not being removed from tasks worksheet before being added to completed tasks
