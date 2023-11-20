@@ -1,6 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from datetime import datetime
+from datetime import datetime, date
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -19,10 +19,10 @@ def display_menu():
     Displays a menu of actions the user can select from
     """
     print('Welcome to Terminal To Do!')
-    print('_' * 80 + '\n')
-    print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Exit')
 
     while True:
+        print('_' * 80 + '\n')
+        print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Exit')
         print('_' * 80 + '\n')
         action = input("What would you like to do:\n").capitalize()
 
@@ -58,7 +58,11 @@ def show_tasks():
 
 def is_valid_date(date_str):
     try:
-        datetime.strptime(date_str, '%d-%m-%Y')
+        parsed_date = datetime.strptime(date_str, '%d-%m-%Y')
+
+        if parsed_date.date() < date.today():
+            raise ValueError("Due date cannot be in the past.")
+
         return True
     except ValueError:
         return False
@@ -67,7 +71,7 @@ def is_valid_date(date_str):
 def new_task():
     while True:
         try:
-            task_name = input("Enter the task name:\n")
+            task_name = input("\nEnter the task name:\n")
 
             if not task_name:
                 raise ValueError("Task name cannot be empty.")
@@ -79,7 +83,7 @@ def new_task():
 
     while True:
         try:
-            task_description = input("Enter the task description:\n")
+            task_description = input("\nEnter the task description:\n")
 
             if not task_description:
                 raise ValueError("Task description cannot be empty.")
@@ -91,10 +95,10 @@ def new_task():
 
     while True:
         try:
-            due_date = input("Enter the due date (format: DD-MM-YYYY):\n")
+            due_date = input("\nEnter the due date (format: DD-MM-YYYY):\n")
 
             if not is_valid_date(due_date):
-                raise ValueError("Invalid date format. Please use DD-MM-YYYY.")
+                raise ValueError("Invalid date provided. Dates should not be in the past and should be provided in format: DD-MM-YYYY.")
 
             break
 
@@ -103,7 +107,7 @@ def new_task():
 
     tasks_worksheet = SHEET.worksheet('tasks')
 
-    print("Updating tasks worksheet...")
+    print("\nUpdating tasks worksheet...")
 
     tasks_worksheet.append_row([task_name, task_description, due_date])
 

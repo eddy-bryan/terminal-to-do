@@ -30,3 +30,16 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 ---
 
 Happy coding!
+
+
+
+
+
+
+
+
+BUGS:
+
+dates for new tasks could be added in the past tense
+used date method from the datetime module to check if parsed_date is in past tense
+
