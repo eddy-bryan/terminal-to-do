@@ -29,15 +29,19 @@ def display_menu():
         if action == 'Show tasks':
             print(f"\nYou selected '{action}'.")
             show_tasks()
+
         elif action == 'New task':
             print(f"\nYou selected '{action}'.")
             new_task()
+
         elif action == 'Complete task':
             print(f"\nYou selected '{action}'.")
-            # complete_task()
+            complete_task()
+
         elif action == 'Exit':
             print("\nExiting program...")
             break
+
         else:
             print('\nAction invalid, please select an option from the "Main menu".')
             print('_' * 80 + '\n')
@@ -69,17 +73,28 @@ def is_valid_date(date_str):
 
 
 def new_task():
+    tasks_worksheet = SHEET.worksheet('tasks')
+
     while True:
-        try:
-            task_name = input("\nEnter the task name:\n")
+        task_name = input("\nEnter the task name:\n")
 
-            if not task_name:
-                raise ValueError("Task name cannot be empty.")
+        if not task_name:
+            print("Error: Task name cannot be empty.")
+            continue
 
-            break
+        all_values = tasks_worksheet.get_all_values()
+        task_exists = False
 
-        except ValueError as e:
-            print(f"Error: {e}")
+        for row in all_values[1:]:
+            if row[0].lower() == task_name.lower():
+                task_exists = True
+                break
+
+        if task_exists:
+            print("Task with the same name already exists.")
+            continue
+
+        break
 
     while True:
         try:
@@ -114,7 +129,53 @@ def new_task():
     print("New task added successfully!")
 
 
-# def complete_task():
+def get_task_details(worksheet, task_name):
+    try:
+        all_values = worksheet.get_all_values()
+
+        task_details = None
+
+        for row in all_values[1:]:
+            if row[0].lower() == task_name_lower():
+                task_details = row
+                break
+
+        if task_details is not None:
+            return task_details
+        else:
+            raise ValueError("Task not found. Please enter a valid task name.")
+
+    except ValueError as e:
+        print(f"Error: {e}")
+        return None
+
+
+def complete_task():
+    try:
+        show_tasks()
+
+        tasks_worksheet = SHEET.worksheet('tasks')
+        completed_tasks_worksheet = SHEET.worksheet('completed_tasks')
+
+        task_name = input("Enter the name of the task you would like to mark as complete (or enter 'cancel' to cancel):\n")
+
+        if task_name.lower() == 'cancel':
+            print("Task completion canceled.")
+            return
+
+        task_details = get_task_details(tasks_worksheet, task_name)
+
+        if task_details:
+            print("Updating completed tasks worksheet...")
+            completed_tasks_worksheet.append_row(task_details)
+
+            print("Updating tasks worksheet...")
+            tasks_worksheet.delete_row(all_values.index(task_details))
+
+            print(f"Task '{task_name}' marked as complete and moved to completed tasks.")
+    
+    except ValueError as e:
+        print(f"Error: {e}")
 
 
 display_menu()

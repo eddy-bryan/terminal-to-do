@@ -43,3 +43,6 @@ BUGS:
 dates for new tasks could be added in the past tense
 used date method from the datetime module to check if parsed_date is in past tense
 
+no way of exiting or cancelling when not in main menu
+
+multiple tasks can be added with the same task name
