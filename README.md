@@ -49,3 +49,11 @@ multiple tasks can be added with the same task name
 added additional validation step to check if a task already exists with the same name before allowing the user to create a new task
 
 tasks are not being removed from tasks worksheet before being added to completed tasks
+
+
+
+
+to add
+
+delete tasks
+cancel option

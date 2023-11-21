@@ -165,18 +165,26 @@ def complete_task():
             print("Task completion canceled.")
             return
 
-        task_details = get_task_details(tasks_worksheet, task_name)
+        task_found = False
 
-        if task_details:
+        for i in range(1, len(all_values)):
+            if all_values[i][0].lower() == task_name.lower():
+                task_found = True
+                row_to_delete = i + 1
+                break
+
+        if task_found:
             print("Updating completed tasks worksheet...")
-            completed_tasks_worksheet.append_row(task_details)
+            completed_tasks_worksheet.append_row(all_values[row_to_delete-1])
             print("Completed tasks worksheet updated successfully.")
 
             print("Updating tasks worksheet...")
-            tasks_worksheet.delete_rows(all_values.index(task_details))
+            tasks_worksheet.delete_rows(row_to_delete)
             print("Tasks worksheet updated successfully.")
 
             print(f"\nTask '{task_name}' marked as complete and moved to completed tasks.")
+        else:
+            print("Task not found. Please enter a valid task name.")
     
     except ValueError as e:
         print(f"Error: {e}")
