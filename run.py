@@ -203,12 +203,25 @@ def complete_task():
 
 def delete_task():
     try:
-        tasks_worksheet = SHEET.worksheet('tasks')
+        while True:
+            selection = input("Would you like to delete from the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n")
+
+            if selection.lower() == 'cancel':
+                print("Task deletion canceled.")
+                return
+            elif selection.lower() == 'tasks':
+                worksheet = SHEET.worksheet('tasks')
+                break
+            elif selection.lower() == 'completed tasks':
+                worksheet = SHEET.worksheet('completed_tasks')
+                break
+            else:
+                print("Selection invalid, please choose either the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n")
 
         while True:
             show_tasks()
 
-            all_values = tasks_worksheet.get_all_values()
+            all_values = worksheet.get_all_values()
 
             print('_' * 80 + '\n')
             task_name = input("Enter the name of the task you would like to delete (or enter 'cancel' to cancel):\n")
@@ -226,9 +239,9 @@ def delete_task():
                     break
 
             if task_found:
-                print("\nUpdating tasks worksheet...")
-                tasks_worksheet.delete_rows(row_to_delete)
-                print("Tasks worksheet updated successfully.")
+                print(f"\nUpdating {worksheet.title.capitalize()} worksheet...")
+                worksheet.delete_rows(row_to_delete)
+                print(f"{worksheet.title.capitalize()} worksheet updated successfully.")
 
                 print(f"\nTask '{task_name}' has been deleted.")
                 break
