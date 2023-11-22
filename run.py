@@ -28,7 +28,7 @@ def display_menu():
 
         if action == 'Show tasks':
             print(f"\nYou selected '{action}'.")
-            show_tasks()
+            show_tasks('tasks')
 
         elif action == 'New task':
             print(f"\nYou selected '{action}'.")
@@ -52,16 +52,24 @@ def display_menu():
             print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Delete Task\n- Exit')
 
 
-def show_tasks():
-    tasks_worksheet = SHEET.worksheet('tasks')
-    all_values = tasks_worksheet.get_all_values()
-    task_data = [row[:3] for row in all_values[1:]]
+def show_tasks(page):
+    try:
+        worksheet = SHEET.worksheet(page)
+        all_values = worksheet.get_all_values()
+        
+        if not all_values:
+            print(f"No tasks found in the '{page}' worksheet.")
+            return
 
-    for task in task_data:
-        print('_' * 80 + '\n')
-        print(f"Task Name: {task[0]}\n")
-        print(f"Description: {task[1]}\n")
-        print(f"Due Date: {task[2]}")
+        task_data = [row[:3] for row in all_values[1:]]
+
+        for task in task_data:
+            print('_' * 80 + '\n')
+            print(f"Task Name: {task[0]}\n")
+            print(f"Description: {task[1]}\n")
+            print(f"Due Date: {task[2]}")
+    except ValueError as e:
+        print(f"Error: {e}")
 
 
 def is_valid_date(date_str):
@@ -164,7 +172,7 @@ def complete_task():
         completed_tasks_worksheet = SHEET.worksheet('completed_tasks')
 
         while True:
-            show_tasks()
+            show_tasks('tasks')
 
             all_values = tasks_worksheet.get_all_values()
 
@@ -219,7 +227,7 @@ def delete_task():
                 print("Selection invalid, please choose either the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n")
 
         while True:
-            show_tasks()
+            show_tasks(selection.lower().replace(" ", "_"))
 
             all_values = worksheet.get_all_values()
 

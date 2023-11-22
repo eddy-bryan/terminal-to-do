@@ -41,25 +41,27 @@ Happy coding!
 BUGS:
 
 dates for new tasks could be added in the past tense
-used date method from the datetime module to check if parsed_date is in past tense
-
-no way of exiting or cancelling when not in main menu
+fix - used date method from the datetime module to check if parsed_date is in past tense
 
 multiple tasks can be added with the same task name
-added additional validation step to check if a task already exists with the same name before allowing the user to create a new task
-
-tasks are not being removed from tasks worksheet before being added to completed tasks
-
-if a user creates a task called cancel it cannot be deleted or completed
+fix - added additional validation step to check if a task already exists with the same name before allowing the user to create a new task
 
 when using the delete task and complete task functions the user is asked to provide a valid task name when an incorrect name is provided, but is then redirected back to the main menu again.
+fix - incorporated a while loop
+
+when a used selects to delete a task from the completed tasks worksheet, the show tasks function does not work due to the space in the user input.
+fix - used .replace(" ", "_")
+
 
 manu menu is printed twice when an invlid action is input
+
+if a user creates a task called cancel it cannot be deleted or completed
 
 
 
 
 to add
 
-delete tasks
-cancel option
+make cancel option into its own function?
+add docstrings and comments!!!
+consolidate code
