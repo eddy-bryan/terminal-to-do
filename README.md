@@ -50,6 +50,12 @@ added additional validation step to check if a task already exists with the same
 
 tasks are not being removed from tasks worksheet before being added to completed tasks
 
+if a user creates a task called cancel it cannot be deleted or completed
+
+when using the delete task and complete task functions the user is asked to provide a valid task name when an incorrect name is provided, but is then redirected back to the main menu again.
+
+manu menu is printed twice when an invlid action is input
+
 
 
 

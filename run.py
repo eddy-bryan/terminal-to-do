@@ -22,7 +22,7 @@ def display_menu():
 
     while True:
         print('_' * 80 + '\n')
-        print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Exit')
+        print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Delete Task\n- Exit')
         print('_' * 80 + '\n')
         action = input("What would you like to do:\n").capitalize()
 
@@ -38,6 +38,10 @@ def display_menu():
             print(f"\nYou selected '{action}'.")
             complete_task()
 
+        elif action == 'Delete task':
+            print(f"\nYou selected '{action}")
+            delete_task()
+
         elif action == 'Exit':
             print("\nExiting program...")
             break
@@ -45,7 +49,7 @@ def display_menu():
         else:
             print('\nAction invalid, please select an option from the "Main menu".')
             print('_' * 80 + '\n')
-            print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Exit')
+            print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Delete Task\n- Exit')
 
 
 def show_tasks():
@@ -130,24 +134,28 @@ def new_task():
 
 
 def get_task_details(worksheet, task_name):
-    try:
-        all_values = worksheet.get_all_values()
+    while True:
+        try:
+            all_values = worksheet.get_all_values()
 
-        task_details = None
+            task_details = None
 
-        for row in all_values[1:]:
-            if row[0].lower() == task_name.lower():
-                task_details = row
-                break
+            for row in all_values[1:]:
+                if row[0].lower() == task_name.lower():
+                    task_details = row
+                    break
 
-        if task_details is not None:
-            return task_details
-        else:
-            raise ValueError("Task not found. Please enter a valid task name.")
+            if task_details is not None:
+                return task_details
+            else:
+                raise ValueError("Task not found. Please enter a valid task name (or enter 'cancel' to cancel):\n")
 
-    except ValueError as e:
-        print(f"Error: {e}")
-        return None
+        except ValueError as e:
+            print(f"Error: {e}")
+
+            if task_name.lower() == 'cancel':
+                print("Action canceled.")
+                return None
 
 
 def complete_task():
@@ -183,6 +191,41 @@ def complete_task():
             print("Tasks worksheet updated successfully.")
 
             print(f"\nTask '{task_name}' marked as complete and moved to completed tasks.")
+        else:
+            print("Task not found. Please enter a valid task name.")
+    
+    except ValueError as e:
+        print(f"Error: {e}")
+
+
+def delete_task():
+    try:
+        show_tasks()
+
+        tasks_worksheet = SHEET.worksheet('tasks')
+
+        all_values = tasks_worksheet.get_all_values()
+
+        task_name = input("Enter the name of the task you would like to delete (or enter 'cancel' to cancel):\n")
+
+        if task_name.lower() == 'cancel':
+            print("Task deletion canceled.")
+            return
+
+        task_found = False
+
+        for i in range(1, len(all_values)):
+            if all_values[i][0].lower() == task_name.lower():
+                task_found = True
+                row_to_delete = i + 1
+                break
+
+        if task_found:
+            print("Updating tasks worksheet...")
+            tasks_worksheet.delete_rows(row_to_delete)
+            print("Tasks worksheet updated successfully.")
+
+            print(f"\nTask '{task_name}' has been deleted.")
         else:
             print("Task not found. Please enter a valid task name.")
     
