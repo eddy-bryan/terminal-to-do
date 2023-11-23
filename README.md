@@ -52,17 +52,14 @@ fix - incorporated a while loop
 when a used selects to delete a task from the completed tasks worksheet, the show tasks function does not work due to the space in the user input.
 fix - used .replace(" ", "_")
 
-
-manu menu is printed twice when an invlid action is input
-
 if a user creates a task called cancel it cannot be deleted or completed
+fix - added option to cancel during any stage during the new_task creation, subsequently a user can no longer name a task 'cancel' as the function is cancelled if 'cancel' is given as a task name.
 
 
 
 
 to add
 
-make cancel option into its own function?
 comments
 consolidate code
 
