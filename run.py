@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime, date
+import sys
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -22,33 +23,18 @@ def display_menu():
 
     while True:
         print('_' * 80 + '\n')
-        print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Delete Task\n- Exit')
+        print('Main menu:')
+        for option in MENU_OPTIONS:
+            print(f'- {option}')
         print('_' * 80 + '\n')
         action = input("What would you like to do:\n").capitalize()
 
-        if action == 'Show tasks':
+        if action in MENU_OPTIONS:
             print(f"\nYou selected '{action}'.")
-            show_tasks('tasks')
-
-        elif action == 'New task':
-            print(f"\nYou selected '{action}'.")
-            new_task()
-
-        elif action == 'Complete task':
-            print(f"\nYou selected '{action}'.")
-            complete_task()
-
-        elif action == 'Delete task':
-            print(f"\nYou selected '{action}'.")
-            delete_task()
-
-        elif action == 'Exit':
-            print("\nExiting program...")
-            break
-
+            MENU_OPTIONS[action]()
         else:
             print('\nAction invalid, please select an option from the "Main menu".')
-            
+
 
 def show_tasks(page):
     """
@@ -283,6 +269,20 @@ def delete_task():
     
     except ValueError as e:
         print(f"Error: {e}")
+
+
+def exit_program():
+    print("\nExiting program...")
+    sys.exit()
+
+
+MENU_OPTIONS = {
+    'Show tasks': lambda: show_tasks('tasks'),
+    'New task': new_task,
+    'Complete task': complete_task,
+    'Delete task': delete_task,
+    'Exit': exit_program
+}
 
 
 display_menu()

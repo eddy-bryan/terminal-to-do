@@ -63,7 +63,7 @@ if a user creates a task called cancel it cannot be deleted or completed
 to add
 
 make cancel option into its own function?
-add docstrings and comments!!!
+comments
 consolidate code
 
 
