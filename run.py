@@ -83,9 +83,12 @@ def new_task():
     tasks_worksheet = SHEET.worksheet('tasks')
 
     while True:
-        task_name = input("\nEnter the task name:\n")
+        task_name = input("\nEnter the task name (or enter 'cancel' to cancel):\n")
 
-        if not task_name:
+        if task_name.lower() == 'cancel':
+            print("Task creation canceled.")
+            return
+        elif not task_name:
             print("Error: Task name cannot be empty.")
             continue
 
@@ -105,9 +108,12 @@ def new_task():
 
     while True:
         try:
-            task_description = input("\nEnter the task description:\n")
+            task_description = input("\nEnter the task description (or enter 'cancel' to cancel):\n")
 
-            if not task_description:
+            if task_description.lower() == 'cancel':
+                print("Task creation canceled.")
+                return
+            elif not task_description:
                 raise ValueError("Task description cannot be empty.")
 
             break
@@ -117,8 +123,11 @@ def new_task():
 
     while True:
         try:
-            due_date = input("\nEnter the due date (format: DD-MM-YYYY):\n")
+            due_date = input("\nEnter the due date (format: DD-MM-YYYY) (or enter 'cancel' to cancel):\n")
 
+            if due_date.lower() == 'cancel':
+                print("Task creation canceled.")
+                return
             if not is_valid_date(due_date):
                 raise ValueError("Invalid date provided. Dates should not be in the past and should be provided in format: DD-MM-YYYY.")
 
