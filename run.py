@@ -16,7 +16,7 @@ SHEET = GSPREAD_CLIENT.open('terminal_to_do')
 
 def display_menu():
     """
-    Displays a menu of actions the user can select from
+    Displays a menu of actions the user can select from.
     """
     print('Welcome to Terminal To Do!')
 
@@ -39,7 +39,7 @@ def display_menu():
             complete_task()
 
         elif action == 'Delete task':
-            print(f"\nYou selected '{action}")
+            print(f"\nYou selected '{action}'.")
             delete_task()
 
         elif action == 'Exit':
@@ -48,11 +48,12 @@ def display_menu():
 
         else:
             print('\nAction invalid, please select an option from the "Main menu".')
-            print('_' * 80 + '\n')
-            print('Main menu:\n\n- Show Tasks\n- New Task\n- Complete Task\n- Delete Task\n- Exit')
-
+            
 
 def show_tasks(page):
+    """
+    Displays a list of tasks to the terminal from the specified worksheet.
+    """
     try:
         worksheet = SHEET.worksheet(page)
         all_values = worksheet.get_all_values()
@@ -73,6 +74,10 @@ def show_tasks(page):
 
 
 def is_valid_date(date_str):
+    """
+    Checks the format of the date input by the user and checks that the
+    date provided is not in the past tense.
+    """
     try:
         parsed_date = datetime.strptime(date_str, '%d-%m-%Y')
 
@@ -85,6 +90,10 @@ def is_valid_date(date_str):
 
 
 def new_task():
+    """
+    This function prompts the user to input task details, validates the input,
+    and appends a new task to the 'Tasks' worksheet.
+    """
     tasks_worksheet = SHEET.worksheet('tasks')
 
     while True:
@@ -142,6 +151,11 @@ def new_task():
 
 
 def get_task_details(worksheet, task_name):
+    """
+    This function searches for a task with the provided name in the given worksheet.
+    If the task is found, its details are returned. If the task is not found, the user
+    is prompted to enter a valid task name or cancel the action.
+    """
     while True:
         try:
             all_values = worksheet.get_all_values()
@@ -167,6 +181,11 @@ def get_task_details(worksheet, task_name):
 
 
 def complete_task():
+    """
+    This function displays the list of tasks from the 'tasks' worksheet and prompts the user
+    to enter the name of the task they want to mark as complete. If the task is found, it is moved
+    to the 'completed_tasks' worksheet, and the original entry is deleted from the 'tasks' worksheet.
+    """
     try:
         tasks_worksheet = SHEET.worksheet('tasks')
         completed_tasks_worksheet = SHEET.worksheet('completed_tasks')
@@ -210,6 +229,12 @@ def complete_task():
 
 
 def delete_task():
+    """
+    This function prompts the user to select whether they want to delete a task from the 'tasks'
+    or 'completed_tasks' worksheet. It then displays the list of tasks from the selected worksheet
+    and prompts the user to enter the name of the task they want to delete. If the task is found,
+    it is deleted from the worksheet.
+    """
     try:
         while True:
             selection = input("Would you like to delete from the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n")

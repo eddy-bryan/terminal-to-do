@@ -65,3 +65,10 @@ to add
 make cancel option into its own function?
 add docstrings and comments!!!
 consolidate code
+
+
+numbered menu?
+textual?
+
+intructions to reproduce google sheet
+cred.json template cred.json.example
