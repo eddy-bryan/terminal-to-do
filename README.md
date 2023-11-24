@@ -60,12 +60,10 @@ fix - added option to cancel during any stage during the new_task creation, subs
 
 to add
 
-comments
 consolidate code
-
 
 numbered menu?
 textual?
 
-intructions to reproduce google sheet
+intructions to reproduce google sheet or a copy of google sheet
 cred.json template cred.json.example

@@ -153,11 +153,8 @@ def new_task():
         except ValueError as e:
             print(f"Error: {e}")
 
-    tasks_worksheet = SHEET.worksheet('tasks')
-
     print("\nUpdating tasks worksheet...")
 
-    # Append the new task to the 'Tasks' worksheet
     tasks_worksheet.append_row([task_name, task_description, due_date])
 
     print("New task added successfully!")
@@ -264,7 +261,7 @@ def delete_task():
     try:
         # Ask which worksheet the user wants to delete from
         while True:
-            selection = input("Would you like to delete from the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n")
+            selection = input("\nWould you like to delete from the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n")
 
             # Check if the user wants to cancel task deletion
             if selection.lower() == 'cancel':
@@ -277,7 +274,7 @@ def delete_task():
                 worksheet = SHEET.worksheet('completed_tasks')
                 break
             else:
-                print("Selection invalid, please choose either the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n")
+                print("\nSelection invalid, please choose either the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n")
 
         while True:
             show_tasks(selection.lower().replace(" ", "_"))
