@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime, date
 import sys
+from colorama import Fore, Style
 
 
 # Google Sheets API autheentication setup
@@ -35,7 +36,7 @@ def display_menu():
             print(f"\nYou selected '{action}'.")
             MENU_OPTIONS[action]()
         else:
-            print('\nAction invalid, please select an option from the "Main menu".')
+            print(f'{Fore.RED}\nAction invalid, please select an option from the "Main menu".{Style.RESET_ALL}')
 
 
 def show_tasks(page):
@@ -51,7 +52,7 @@ def show_tasks(page):
         
         # Check if there are tasks
         if not all_values:
-            print(f"No tasks found in the '{page}' worksheet.")
+            print(f"{Fore.RED}No tasks found in the '{page}' worksheet.{Style.RESET_ALL}")
             return
 
         # Extract task data (excluding header)
@@ -64,7 +65,7 @@ def show_tasks(page):
             print(f"Description: {task[1]}\n")
             print(f"Due Date: {task[2]}")
     except ValueError as e:
-        print(f"Error: {e}")
+        print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
 
 def is_valid_date(date_str):
@@ -78,7 +79,7 @@ def is_valid_date(date_str):
 
         # Check if the date is in the past
         if parsed_date.date() < date.today():
-            raise ValueError("Due date cannot be in the past.")
+            raise ValueError(f"{Fore.RED}Due date cannot be in the past.{Style.RESET_ALL}")
 
         return True
     except ValueError:
@@ -101,7 +102,7 @@ def new_task():
             print("Task creation canceled.")
             return
         elif not task_name:
-            print("Error: Task name cannot be empty.")
+            print(f"{Fore.RED}Error: Task name cannot be empty.{Style.RESET_ALL}")
             continue
         
         # Check a task with the same name already exists
@@ -114,7 +115,7 @@ def new_task():
                 break
 
         if task_exists:
-            print("Task with the same name already exists.")
+            print(f"{Fore.RED}Task with the same name already exists.{Style.RESET_ALL}")
             continue
 
         break
@@ -129,12 +130,12 @@ def new_task():
                 print("Task creation canceled.")
                 return
             elif not task_description:
-                raise ValueError("Task description cannot be empty.")
+                raise ValueError(f"{Fore.RED}Task description cannot be empty.{Style.RESET_ALL}")
 
             break
 
         except ValueError as e:
-            print(f"Error: {e}")
+            print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
     while True:
         try:
@@ -146,12 +147,12 @@ def new_task():
                 print("Task creation canceled.")
                 return
             if not is_valid_date(due_date):
-                raise ValueError("Invalid date provided. Dates should not be in the past and should be provided in format: DD-MM-YYYY.")
+                raise ValueError(f"{Fore.RED}Invalid date provided. Dates should not be in the past and should be provided in format: DD-MM-YYYY.{Style.RESET_ALL}")
 
             break
 
         except ValueError as e:
-            print(f"Error: {e}")
+            print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
     print("\nUpdating tasks worksheet...")
 
@@ -184,10 +185,10 @@ def get_task_details(worksheet, task_name):
             if task_details is not None:
                 return task_details
             else:
-                raise ValueError("\nTask not found. Please enter a valid task name (or enter 'cancel' to cancel):")
+                raise ValueError(f"{Fore.RED}\nTask not found. Please enter a valid task name (or enter 'cancel' to cancel):{Style.RESET_ALL}")
 
         except ValueError as e:
-            print(f"Error: {e}")
+            print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
             # Check if the action is canceled
             if task_name.lower() == 'cancel':
@@ -245,10 +246,10 @@ def complete_task():
                 print(f"\nTask '{task_name}' marked as complete and moved to completed tasks.")
                 break
             else:
-                print("\nTask not found. Please enter a valid task name (or enter 'cancel' to cancel):\n")
+                print(f"{Fore.RED}\nTask not found. Please enter a valid task name (or enter 'cancel' to cancel):\n{Style.RESET_ALL}")
     
     except ValueError as e:
-        print(f"Error: {e}")
+        print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
 
 def delete_task():
@@ -274,7 +275,7 @@ def delete_task():
                 worksheet = SHEET.worksheet('completed_tasks')
                 break
             else:
-                print("\nSelection invalid, please choose either the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n")
+                print(f"{Fore.RED}\nSelection invalid, please choose either the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n{Style.RESET_ALL}")
 
         while True:
             show_tasks(selection.lower().replace(" ", "_"))
@@ -308,10 +309,10 @@ def delete_task():
                 print(f"\nTask '{task_name}' has been deleted.")
                 break
             else:
-                print("\nTask not found. Please enter a valid task name (or enter 'cancel' to cancel):\n")
+                print(f"{Fore.RED}\nTask not found. Please enter a valid task name (or enter 'cancel' to cancel):\n{Style.RESET_ALL}")
     
     except ValueError as e:
-        print(f"Error: {e}")
+        print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
 
 def exit_program():
