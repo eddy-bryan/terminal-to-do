@@ -27,16 +27,22 @@ def display_menu():
     while True:
         print('_' * 80 + '\n')
         print('Main menu:')
-        for option in MENU_OPTIONS:
-            print(f'- {option}')
+        for i, (option, _) in enumerate(MENU_OPTIONS, start=1):
+            print(f'{i}. {option}')
         print('_' * 80 + '\n')
-        action = input("What would you like to do:\n").capitalize()
 
-        if action in MENU_OPTIONS:
-            print(f"\nYou selected '{action}'.")
-            MENU_OPTIONS[action]()
-        else:
-            print(f'{Fore.RED}\nAction invalid, please select an option from the "Main menu".{Style.RESET_ALL}')
+        try:
+            action_num = int(input("Select the number of the action you would like to perform:\n"))
+
+            if 1 <= action_num <= len(MENU_OPTIONS):
+                action = MENU_OPTIONS[action_num - 1][1]
+                print(f"\nYou selected '{MENU_OPTIONS[action_num - 1][0]}'.")
+                action()
+            else:
+                print(f'{Fore.RED}\nInvalid action number. Please select a number from the menu.{Style.RESET_ALL}')
+
+        except ValueError:
+            print(f'{Fore.RED}\nInvalid input. Please enter a number.{Style.RESET_ALL}')
 
 
 def show_tasks(page):
@@ -321,13 +327,13 @@ def exit_program():
 
 
 # Dictionary of menu options and corresponding functions
-MENU_OPTIONS = {
-    'Show tasks': lambda: show_tasks('tasks'),
-    'New task': new_task,
-    'Complete task': complete_task,
-    'Delete task': delete_task,
-    'Exit': exit_program
-}
+MENU_OPTIONS = [
+    ('Show tasks', lambda: show_tasks('tasks')),
+    ('New task', new_task),
+    ('Complete task', complete_task),
+    ('Delete task', delete_task),
+    ('Exit', exit_program)
+]
 
 
 # Main execution
