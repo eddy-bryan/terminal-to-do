@@ -104,6 +104,20 @@ ___
 ___
 ![Exit](assets/images/exit.png)
 
+## Future Features
+
+### Task Prioritisation
+
+- The user could be able to assign tasks with different priority levels.
+
+### Task Categories
+
+- The tasks could be arranged into different categories or projects.
+
+### Reminder Notifications
+
+- Notifications or alerts could be incorporated for tasks with upcoming deadlines.
+
 
 
 
