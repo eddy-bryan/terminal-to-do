@@ -108,6 +108,10 @@ This application empowers you to showcase an entire task list, generate new task
 
 - Notifications or alerts could be incorporated for tasks with upcoming deadlines.
 
+# Data Model
+
+The data model is structured around the Google Sheets worksheet, with 'tasks' and 'completed_tasks' serving as primary entities. Each task is represented by a row in the respective worksheet, capturing details such as task name, description, and due date. The interaction with the data model is encapsulated within the application's logic, ensuring seamless integration with Google Sheets for efficient task management.
+
 
 
 
