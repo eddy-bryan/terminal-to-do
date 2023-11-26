@@ -112,6 +112,54 @@ This application empowers you to showcase an entire task list, generate new task
 
 The data model is structured around the Google Sheets worksheet, with 'tasks' and 'completed_tasks' serving as primary entities. Each task is represented by a row in the respective worksheet, capturing details such as task name, description, and due date. The interaction with the data model is encapsulated within the application's logic, ensuring seamless integration with Google Sheets for efficient task management.
 
+# Testing
+
+<!-- I have diligently tested the Terminal To Do project to identify and address potential issues. The testing process includes the following:
+
+- Utilized a PEP8 linter to ensure code adherence to style guidelines, resulting in a clean and well-formatted codebase.
+- Conducted rigorous testing with various inputs, including strings instead of numbers, out-of-bounds entries, and repeated inputs. This helped identify and resolve issues related to user input.
+- Tested the application extensively in both my local terminal and the Code Institute Heroku terminal, ensuring compatibility and functionality across different environments.
+Bugs -->
+
+## Resolved Bugs
+
+### Dates for New Tasks in Past Tense
+
+- **Issue:** Dates for new tasks could be added in the past tense.
+- **Fix:** Implemented the date method from the datetime module to check if the parsed date is in the past tense, ensuring accurate date entries for new tasks.
+
+### Multiple Tasks with the Same Name
+
+- **Issue:** Multiple tasks can be added with the same task name.
+- **Fix:** Introduced an additional validation step to check if a task already exists with the same name before allowing the user to create a new task, preventing duplicate entries.
+
+### Redirect Loop Issue in Delete and Complete Task Functions
+
+- **Issue:** When an incorrect task name is provided during the delete or complete task functions, the user is asked to provide a valid task name but is then redirected back to the main menu again.
+- **Fix:** Incorporated a while loop to allow the user to re-enter the task name until a valid one is provided, ensuring a smoother user experience.
+
+### Show Tasks Functionality Issue After Deleting from Completed Tasks
+
+- **Issue:** When a user selects to delete a task from the completed tasks worksheet, the show tasks function does not work due to the space in the user input.
+- **Fix:** Implemented `.replace(" ", "_")` to replace spaces with underscores in the user input, resolving the issue and allowing the show tasks function to work seamlessly after deleting from completed tasks.
+
+### Task Named 'Cancel' Cannot Be Deleted or Completed
+
+- **Issue:** If a user creates a task called 'cancel,' it cannot be deleted or completed.
+- **Fix:** Added an option to cancel during any stage of new task creation. Subsequently, a user can no longer name a task 'cancel' as the function is canceled if 'cancel' is given as a task name, preventing issues with deletion or completion.
+
+<!-- ## Remaining Bugs
+
+No remaining bugs have been identified after thorough testing and bug fixing.
+
+## Validator Testing
+
+- PEP8
+    - No errors were returned from PEP8online.com, confirming the code's compliance with PEP8 style guidelines. -->
+
+
+
+
 
 
 
@@ -158,6 +206,8 @@ Happy coding!
 
 
 
+
+
 BUGS:
 
 dates for new tasks could be added in the past tense
@@ -179,11 +229,6 @@ fix - added option to cancel during any stage during the new_task creation, subs
 
 
 to add
-
-consolidate code
-
-numbered menu?
-textual?
 
 intructions to reproduce google sheet or a copy of google sheet
 cred.json template cred.json.example
