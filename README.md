@@ -5,54 +5,104 @@ The Terminal To Do app is a command-line task manager designed for simplicity an
 
 !!!!!SCREENSHOT OF DEPLOYED APP IN RESPONSIVE DESIGN<<<<<
 
-## How To Use
+# How To Use
 
 Terminal To Do is smoothly integrated with Google Sheets to streamline task tracking. Refer to the 'setup_guide.md' for detailed instructions on configuring your personalized task management spreadsheet.
 
 This application empowers you to showcase an entire task list, generate new tasks complete with descriptions and due dates, designate tasks as completed and shift them to a dedicated sheet for accomplished tasks within the spreadsheet. Additionally, you have the flexibility to remove tasks from either your active task list or the catalog of completed tasks as needed—all within the confines of the terminal window.
 
-## Features
+# Features
 
-### Existing Features
+## Existing Features
 
-Main Menu
+### Main Menu
 
 - User-friendly main menu with numbered options for easy interaction.
 - Minimises user input errors by utilising numbers to correspond with actions.
+
+___
+![Main Menu](assets/images/main_menu.png)
+
 - Clear error messages guide users to correct input issues and proceed with their intended actions.
 
-Show Tasks
+___
+![Invalid Input](assets/images/invalid_input.png)
+___
+![Invalid Number](assets/images/invalid_number.png)
+
+### Show Tasks
 
 - Option 1, "Show Tasks", provides an overview of task names, descriptions, and due dates.
 - Tasks are displayed in a structured format for readability.
+
+___
+![Show Tasks](assets/images/show_tasks.png)
+
 - Data validation prevents attempting to display tasks when none are present, guiding users with informative messages.
 
-New Task
+### New Task
 
 - Option 2, "New Task", guides users through adding a new task to the 'tasks' worksheet.
 - Users input task name, description, and due date.
+
+___
+![New Task](assets/images/new_task.png)
+
 - Robust data validation checks prevent the creation of tasks with empty names or descriptions and ensure that due dates are in the correct format and are not in the past tense.
+
+___
+![Task Name Error](assets/images/task_name_error.png)
+___
+![Task Description Error](assets/images/task_description_error.png)
+___
+![Task Due Date Error 1](assets/images/due_date_error1.png)
+___
+![Task Due Date Error 2](assets/images/due_date_error2.png)
+
 - An option to cancel is provided to the user, which cancels the task creation and redirects the user back to the main menu, preventing users from naming tasks 'cancel' in the process.
 
-Complete Task
+### Complete Task
 
 - Option 3, "Complete Task", allows users to mark a task as complete, moving it to the 'completed_tasks' worksheet.
 - Users are asked to input the name of the task to mark as complete.
+
+___
+![Complete Task](assets/images/complete_task.png)
+
 - Users are given an option to cancel task completion and return to the main menu.
 - Data validation ensures a valid task name is entered, with error messages guiding users if the task is not found.
+
+___
+![Complete Task Error](assets/images/complete_task_error.png)
+
 - Updates both 'tasks' and 'completed_tasks' worksheets upon successful completion.
 
-Delete Task
+### Delete Task
 
 - Option 4, "Delete Task", prompts users to select the task sheet ('tasks' or 'completed_tasks') and enter the task name for deletion.
+
+___
+![Delete Task 1](assets/images/delete_task1.png)
+___
+![Delete Task 2](assets/images/delete_task2.png)
+
 - An option to cancel and return to the main menu is provided at each stage during task deletion.
 - Validates inputs, ensuring the user selects a valid sheet and enters a valid task name.
+
+___
+![Delete Task Error 1](assets/images/delete_task_error1.png)
+___
+![Delete Task Error 2](assets/images/delete_task_error2.png)
+
 - Updates the respective worksheet and provides feedback upon successful deletion.
 
-Exit
+### Exit
 
 - Option 5, "Exit", enables users to safely exit the application.
 - Provides a clear exit message, ensuring users are informed when the program is terminating.
+
+___
+![Exit](assets/images/exit.png)
 
 
 
