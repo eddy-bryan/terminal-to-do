@@ -1,3 +1,32 @@
+# Terminal To Do
+The Terminal To Do app is a command-line task manager designed for simplicity and efficiency. Users interact via a text-based interface to view, add, complete, and delete tasks. It utilizes Google Sheets for data storage, enhancing organization and helping users stay on top of their daily activities.
+
+!!!!!ADD LINK TO LIVE PROJECT<<<<<
+
+!!!!!SCREENSHOT OF DEPLOYED APP IN RESPONSIVE DESIGN<<<<<
+
+Terminal To Do is smoothly integrated with Google Sheets to streamline task tracking. Refer to the 'setup_guide.md' for detailed instructions on configuring your personalized task management spreadsheet.
+
+This application empowers you to showcase an entire task list, generate new tasks complete with descriptions and due dates, designate tasks as completed and shift them to a dedicated sheet for accomplished tasks within the spreadsheet. Additionally, you have the flexibility to remove tasks from either your active task list or the catalog of completed tasks as needed—all within the confines of the terminal window.
+
+Separate .md file to cover setting up and linking google sheets document:
+
+To get started, set up a Google Sheets template using the 'template.xlsx' file provided. Download the file to your computer, from your Google Sheets account, create a new spreadsheet and select file > import and drag over the downloaded file into the area highlighted to create your own task list. (ensure that you rename the file to 'terminal_to_do' or change the code 'SHEET = GSPREAD_CLIENT.open('terminal_to_do')' appropriately.)
+
+nagivate to google cloud
+select a project > new project > name project
+select project > APIs and services > library
+search: google drive API 'enable'
+create credentials > copy Code Institute guide
+import file, rename to creds.json
+copy email without quotes from creds.json file and share your google sheet file to the email address
+you are set up
+
+
+
+
+
+
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 Welcome,
