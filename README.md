@@ -157,6 +157,18 @@ No remaining bugs have been identified after thorough testing and bug fixing.
 - PEP8
     - No errors were returned from PEP8online.com, confirming the code's compliance with PEP8 style guidelines. -->
 
+# Deployment
+
+Code Institute's mock terminal for Heroku has been used to deploy this project.
+
+### Deployment Steps:
+- Clone this repository
+- Create a new app on Heroku
+- Set up the buildpacks on your app to Python and NodeJS in this order
+- Link your Heroku app to your GitHub repository
+- Click Deploy to Heroku
+
+
 
 
 
