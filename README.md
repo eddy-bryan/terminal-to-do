@@ -114,12 +114,11 @@ The data model is structured around the Google Sheets worksheet, with 'tasks' an
 
 # Testing
 
-<!-- I have diligently tested the Terminal To Do project to identify and address potential issues. The testing process includes the following:
+I have diligently tested the Terminal To Do project to identify and address potential issues. The testing process includes the following:
 
 - Utilized a PEP8 linter to ensure code adherence to style guidelines, resulting in a clean and well-formatted codebase.
-- Conducted rigorous testing with various inputs, including strings instead of numbers, out-of-bounds entries, and repeated inputs. This helped identify and resolve issues related to user input.
+- Conducted rigorous testing with various inputs, including strings instead of numbers, past tense dates, and blank inputs. This helped identify and resolve issues related to user input.
 - Tested the application extensively in both my local terminal and the Code Institute Heroku terminal, ensuring compatibility and functionality across different environments.
-Bugs -->
 
 ## Resolved Bugs
 
@@ -148,11 +147,11 @@ Bugs -->
 - **Issue:** If a user creates a task called 'cancel,' it cannot be deleted or completed.
 - **Fix:** Added an option to cancel during any stage of new task creation. Subsequently, a user can no longer name a task 'cancel' as the function is canceled if 'cancel' is given as a task name, preventing issues with deletion or completion.
 
-<!-- ## Remaining Bugs
+## Remaining Bugs
 
 No remaining bugs have been identified after thorough testing and bug fixing.
 
-## Validator Testing
+<!-- ## Validator Testing
 
 - PEP8
     - No errors were returned from PEP8online.com, confirming the code's compliance with PEP8 style guidelines. -->
@@ -162,85 +161,14 @@ No remaining bugs have been identified after thorough testing and bug fixing.
 Code Institute's mock terminal for Heroku has been used to deploy this project.
 
 ### Deployment Steps:
+
 - Clone this repository
 - Create a new app on Heroku
 - Set up the buildpacks on your app to Python and NodeJS in this order
 - Link your Heroku app to your GitHub repository
 - Click Deploy to Heroku
 
+# Credits
 
-
-
-
-
-
-
-
-
-
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
-
-Welcome,
-
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
-
-## Reminders
-
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
-
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
----
-
-Happy coding!
-
-
-
-
-
-
-
-
-
-
-BUGS:
-
-dates for new tasks could be added in the past tense
-fix - used date method from the datetime module to check if parsed_date is in past tense
-
-multiple tasks can be added with the same task name
-fix - added additional validation step to check if a task already exists with the same name before allowing the user to create a new task
-
-when using the delete task and complete task functions the user is asked to provide a valid task name when an incorrect name is provided, but is then redirected back to the main menu again.
-fix - incorporated a while loop
-
-when a used selects to delete a task from the completed tasks worksheet, the show tasks function does not work due to the space in the user input.
-fix - used .replace(" ", "_")
-
-if a user creates a task called cancel it cannot be deleted or completed
-fix - added option to cancel during any stage during the new_task creation, subsequently a user can no longer name a task 'cancel' as the function is cancelled if 'cancel' is given as a task name.
-
-
-
-
-to add
-
-intructions to reproduce google sheet or a copy of google sheet
-cred.json template cred.json.example
+- Code Institute for the API credentials guide
+- Code Institute for the provided terminal for Heroku deployment
