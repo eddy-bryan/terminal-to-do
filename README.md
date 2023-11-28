@@ -147,6 +147,11 @@ I have diligently tested the Terminal To Do project to identify and address pote
 - **Issue:** If a user creates a task called 'cancel,' it cannot be deleted or completed.
 - **Fix:** Added an option to cancel during any stage of new task creation. Subsequently, a user can no longer name a task 'cancel' as the function is canceled if 'cancel' is given as a task name, preventing issues with deletion or completion.
 
+### Task Names and Descriptions Can Be ' '
+
+- **Issue:** A user is unable to leave task names blank as intended, but is able to input task names or descriptions as ' '.
+- **Fix:** Adjusted code for checking if task names and descriptions are blank and added `or task_name.isspace()` and `or task_description.isspace()`.
+
 ## Remaining Bugs
 
 No remaining bugs have been identified after thorough testing and bug fixing.

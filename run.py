@@ -113,7 +113,7 @@ def new_task():
         if task_name.lower() == "cancel":
             print("Task creation canceled.")
             return
-        elif not task_name:
+        elif not task_name or task_name.isspace():
             print(f"{Fore.RED}Error: Task name cannot be empty."
                   f"{Style.RESET_ALL}")
             continue
@@ -144,7 +144,7 @@ def new_task():
             if task_description.lower() == "cancel":
                 print("Task creation canceled.")
                 return
-            elif not task_description:
+            elif not task_description or task_description.isspace():
                 raise ValueError(f"{Fore.RED}Task description cannot be empty."
                                  f"{Style.RESET_ALL}")
 
