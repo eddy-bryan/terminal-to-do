@@ -1,13 +1,13 @@
 # Terminal To Do
 The Terminal To Do app is a command-line task manager designed for simplicity and efficiency. Users interact via a text-based interface to view, add, complete, and delete tasks. It utilizes Google Sheets for data storage, enhancing organization and helping users stay on top of their daily activities.
 
-!!!!!ADD LINK TO LIVE PROJECT<<<<<
+[Link to live project.](https://terminal-to-do-7f7cccdfcb74.herokuapp.com/)
 
-!!!!!SCREENSHOT OF DEPLOYED APP IN RESPONSIVE DESIGN<<<<<
+![Responsive Design Screenshot](assets/images/responsive.png)
 
 # How To Use
 
-Terminal To Do is smoothly integrated with Google Sheets to streamline task tracking. Refer to the 'setup_guide.md' for detailed instructions on configuring your personalized task management spreadsheet.
+Terminal To Do is smoothly integrated with Google Sheets to streamline task tracking. Refer to the [Setup Guide](setup_guide.md) for detailed instructions on configuring your personalized task management spreadsheet.
 
 This application empowers you to showcase an entire task list, generate new tasks complete with descriptions and due dates, designate tasks as completed and shift them to a dedicated sheet for accomplished tasks within the spreadsheet. Additionally, you have the flexibility to remove tasks from either your active task list or the catalog of completed tasks as needed—all within the confines of the terminal window.
 
