@@ -12,37 +12,40 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-CREDS = Credentials.from_service_account_file('creds.json')
+CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('terminal_to_do')
+SHEET = GSPREAD_CLIENT.open("terminal_to_do")
 
 
 def display_menu():
     """
     Displays a menu of actions the user can select from.
     """
-    print('Welcome to Terminal To Do!')
+    print("Welcome to Terminal To Do!")
 
     while True:
-        print('_' * 80 + '\n')
-        print('Main menu:')
+        print("_" * 80 + "\n")
+        print("Main menu:")
         for i, (option, _) in enumerate(MENU_OPTIONS, start=1):
-            print(f'{i}. {option}')
-        print('_' * 80 + '\n')
+            print(f"{i}. {option}")
+        print("_" * 80 + "\n")
 
         try:
-            action_num = int(input("Select the number of the action you would like to perform:\n"))
+            action_num = int(input("Select the number of the action you would "
+                                   "like to perform:\n"))
 
             if 1 <= action_num <= len(MENU_OPTIONS):
                 action = MENU_OPTIONS[action_num - 1][1]
                 print(f"\nYou selected '{MENU_OPTIONS[action_num - 1][0]}'.")
                 action()
             else:
-                print(f'{Fore.RED}\nInvalid action number. Please select a number from the menu.{Style.RESET_ALL}')
+                print(f"{Fore.RED}\nInvalid action number. Please select a "
+                      f"number from the menu.{Style.RESET_ALL}")
 
         except ValueError:
-            print(f'{Fore.RED}\nInvalid input. Please enter a number.{Style.RESET_ALL}')
+            print(f"{Fore.RED}\nInvalid input. Please enter a number."
+                  f"{Style.RESET_ALL}")
 
 
 def show_tasks(page):
@@ -55,10 +58,11 @@ def show_tasks(page):
 
         # Retrieve all values from the worksheet
         all_values = worksheet.get_all_values()
-        
+
         # Check if there are tasks
         if not all_values:
-            print(f"{Fore.RED}No tasks found in the '{page}' worksheet.{Style.RESET_ALL}")
+            print(f"{Fore.RED}No tasks found in the '{page}' worksheet."
+                  f"{Style.RESET_ALL}")
             return
 
         # Extract task data (excluding header)
@@ -85,7 +89,8 @@ def is_valid_date(date_str):
 
         # Check if the date is in the past
         if parsed_date.date() < date.today():
-            raise ValueError(f"{Fore.RED}Due date cannot be in the past.{Style.RESET_ALL}")
+            raise ValueError(f"{Fore.RED}Due date cannot be in the past."
+                             f"{Style.RESET_ALL}")
 
         return True
     except ValueError:
@@ -97,20 +102,22 @@ def new_task():
     This function prompts the user to input task details, validates the input,
     and appends a new task to the 'Tasks' worksheet.
     """
-    tasks_worksheet = SHEET.worksheet('tasks')
+    tasks_worksheet = SHEET.worksheet("tasks")
 
     while True:
         # Get the task name from the user
-        task_name = input("\nEnter the task name (or enter 'cancel' to cancel):\n")
+        task_name = input("\nEnter the task name (or enter 'cancel' to cancel)"
+                          ":\n")
 
         # Check if the user wants to cancel task creation
-        if task_name.lower() == 'cancel':
+        if task_name.lower() == "cancel":
             print("Task creation canceled.")
             return
         elif not task_name:
-            print(f"{Fore.RED}Error: Task name cannot be empty.{Style.RESET_ALL}")
+            print(f"{Fore.RED}Error: Task name cannot be empty."
+                  f"{Style.RESET_ALL}")
             continue
-        
+
         # Check a task with the same name already exists
         all_values = tasks_worksheet.get_all_values()
         task_exists = False
@@ -121,7 +128,8 @@ def new_task():
                 break
 
         if task_exists:
-            print(f"{Fore.RED}Task with the same name already exists.{Style.RESET_ALL}")
+            print(f"{Fore.RED}Task with the same name already exists."
+                  f"{Style.RESET_ALL}")
             continue
 
         break
@@ -129,14 +137,16 @@ def new_task():
     while True:
         try:
             # Get task description from the user
-            task_description = input("\nEnter the task description (or enter 'cancel' to cancel):\n")
+            task_description = input("\nEnter the task description (or enter "
+                                     "'cancel' to cancel):\n")
 
             # Check if the user wants to cancel task creation
-            if task_description.lower() == 'cancel':
+            if task_description.lower() == "cancel":
                 print("Task creation canceled.")
                 return
             elif not task_description:
-                raise ValueError(f"{Fore.RED}Task description cannot be empty.{Style.RESET_ALL}")
+                raise ValueError(f"{Fore.RED}Task description cannot be empty."
+                                 f"{Style.RESET_ALL}")
 
             break
 
@@ -146,14 +156,18 @@ def new_task():
     while True:
         try:
             # Get the due date from the user
-            due_date = input("\nEnter the due date (format: DD-MM-YYYY) (or enter 'cancel' to cancel):\n")
+            due_date = input("\nEnter the due date (format: DD-MM-YYYY) (or "
+                             "enter 'cancel' to cancel):\n")
 
             # Check if the user wants to cancel task creation
-            if due_date.lower() == 'cancel':
+            if due_date.lower() == "cancel":
                 print("Task creation canceled.")
                 return
             if not is_valid_date(due_date):
-                raise ValueError(f"{Fore.RED}Invalid date provided. Dates should not be in the past and should be provided in format: DD-MM-YYYY.{Style.RESET_ALL}")
+                raise ValueError(f"{Fore.RED}Invalid date provided. Dates "
+                                 f"should not be in the past and should be "
+                                 f"provided in format: DD-MM-YYYY."
+                                 f"{Style.RESET_ALL}")
 
             break
 
@@ -169,9 +183,10 @@ def new_task():
 
 def get_task_details(worksheet, task_name):
     """
-    This function searches for a task with the provided name in the given worksheet.
-    If the task is found, its details are returned. If the task is not found, the user
-    is prompted to enter a valid task name or cancel the action.
+    This function searches for a task with the provided name in the given
+    worksheet. If the task is found, its details are returned. If the task
+    is not found, the user is prompted to enter a valid task name or cancel
+    the action.
     """
     while True:
         try:
@@ -191,41 +206,46 @@ def get_task_details(worksheet, task_name):
             if task_details is not None:
                 return task_details
             else:
-                raise ValueError(f"{Fore.RED}\nTask not found. Please enter a valid task name (or enter 'cancel' to cancel):{Style.RESET_ALL}")
+                raise ValueError(f"{Fore.RED}\nTask not found. Please enter a "
+                                 f"valid task name (or enter 'cancel' to "
+                                 f"cancel):{Style.RESET_ALL}")
 
         except ValueError as e:
             print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
             # Check if the action is canceled
-            if task_name.lower() == 'cancel':
+            if task_name.lower() == "cancel":
                 print("Action canceled.")
                 return None
 
 
 def complete_task():
     """
-    This function displays the list of tasks from the 'tasks' worksheet and prompts the user
-    to enter the name of the task they want to mark as complete. If the task is found, it is moved
-    to the 'completed_tasks' worksheet, and the original entry is deleted from the 'tasks' worksheet.
+    This function displays the list of tasks from the 'tasks' worksheet and
+    prompts the user to enter the name of the task they want to mark as
+    complete. If the task is found, it is moved to the 'completed_tasks'
+    worksheet, and the original entry is deleted from the 'tasks' worksheet.
     """
     try:
         # Get the 'tasks' and 'completed_tasks' worksheets
-        tasks_worksheet = SHEET.worksheet('tasks')
-        completed_tasks_worksheet = SHEET.worksheet('completed_tasks')
+        tasks_worksheet = SHEET.worksheet("tasks")
+        completed_tasks_worksheet = SHEET.worksheet("completed_tasks")
 
         while True:
             # Show the list of tasks in the 'tasks' worksheet
-            show_tasks('tasks')
+            show_tasks("tasks")
 
             # Get all values from the 'tasks' worksheet
             all_values = tasks_worksheet.get_all_values()
 
-            print('_' * 80 + '\n')
+            print("_" * 80 + "\n")
             # Get the name of the task to mark as complete from the user
-            task_name = input("Enter the name of the task you would like to mark as complete (or enter 'cancel' to cancel):\n")
+            task_name = input("Enter the name of the task you would like to "
+                              "mark as complete (or enter 'cancel' to cancel)"
+                              ":\n")
 
             # Check if the task completion is canceled
-            if task_name.lower() == 'cancel':
+            if task_name.lower() == "cancel":
                 print("Task completion canceled.")
                 return
 
@@ -241,7 +261,8 @@ def complete_task():
             if task_found:
                 print("\nUpdating completed tasks worksheet...")
                 # Append the task to the 'completed_tasks' worksheet
-                completed_tasks_worksheet.append_row(all_values[row_to_delete-1])
+                completed_tasks_worksheet.append_row(all_values
+                                                     [row_to_delete-1])
                 print("Completed tasks worksheet updated successfully.")
 
                 print("Updating tasks worksheet...")
@@ -249,51 +270,60 @@ def complete_task():
                 tasks_worksheet.delete_rows(row_to_delete)
                 print("Tasks worksheet updated successfully.")
 
-                print(f"\nTask '{task_name}' marked as complete and moved to completed tasks.")
+                print(f"\nTask '{task_name}' marked as complete and moved to "
+                      f"completed tasks.")
                 break
             else:
-                print(f"{Fore.RED}\nTask not found. Please enter a valid task name (or enter 'cancel' to cancel):\n{Style.RESET_ALL}")
-    
+                print(f"{Fore.RED}\nTask not found. Please enter a valid task "
+                      f"name (or enter 'cancel' to cancel):\n"
+                      f"{Style.RESET_ALL}")
+
     except ValueError as e:
         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
 
 def delete_task():
     """
-    This function prompts the user to select whether they want to delete a task from the 'tasks'
-    or 'completed_tasks' worksheet. It then displays the list of tasks from the selected worksheet
-    and prompts the user to enter the name of the task they want to delete. If the task is found,
-    it is deleted from the worksheet.
+    This function prompts the user to select whether they want to delete a
+    task from the 'tasks' or 'completed_tasks' worksheet. It then displays
+    the list of tasks from the selected worksheet and prompts the user to
+    enter the name of the task they want to delete. If the task is found, it
+    is deleted from the worksheet.
     """
     try:
         # Ask which worksheet the user wants to delete from
         while True:
-            selection = input("\nWould you like to delete from the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n")
+            selection = input("\nWould you like to delete from the 'Tasks' or "
+                              "'Completed Tasks' list (or enter 'cancel' to "
+                              "cancel):\n")
 
             # Check if the user wants to cancel task deletion
-            if selection.lower() == 'cancel':
+            if selection.lower() == "cancel":
                 print("Task deletion canceled.")
                 return
-            elif selection.lower() == 'tasks':
-                worksheet = SHEET.worksheet('tasks')
+            elif selection.lower() == "tasks":
+                worksheet = SHEET.worksheet("tasks")
                 break
-            elif selection.lower() == 'completed tasks':
-                worksheet = SHEET.worksheet('completed_tasks')
+            elif selection.lower() == "completed tasks":
+                worksheet = SHEET.worksheet("completed_tasks")
                 break
             else:
-                print(f"{Fore.RED}\nSelection invalid, please choose either the 'Tasks' or 'Completed Tasks' list (or enter 'cancel' to cancel):\n{Style.RESET_ALL}")
+                print(f"{Fore.RED}\nSelection invalid, please choose either "
+                      f"the 'Tasks' or 'Completed Tasks' list (or enter "
+                      f"'cancel' to cancel):\n{Style.RESET_ALL}")
 
         while True:
             show_tasks(selection.lower().replace(" ", "_"))
 
             all_values = worksheet.get_all_values()
 
-            print('_' * 80 + '\n')
+            print("_" * 80 + "\n")
             # Get the task name to delete from the user
-            task_name = input("Enter the name of the task you would like to delete (or enter 'cancel' to cancel):\n")
+            task_name = input("Enter the name of the task you would like to "
+                              "delete (or enter 'cancel' to cancel):\n")
 
             # Check if the user wants to cancel task deletion
-            if task_name.lower() == 'cancel':
+            if task_name.lower() == "cancel":
                 print("Task deletion canceled.")
                 return
 
@@ -307,16 +337,20 @@ def delete_task():
                     break
 
             if task_found:
-                print(f"\nUpdating {worksheet.title.capitalize()} worksheet...")
+                print(f"\nUpdating {worksheet.title.capitalize()} "
+                      f"worksheet...")
                 # Delete the task from the worksheet
                 worksheet.delete_rows(row_to_delete)
-                print(f"{worksheet.title.capitalize()} worksheet updated successfully.")
+                print(f"{worksheet.title.capitalize()} worksheet updated "
+                      f"successfully.")
 
                 print(f"\nTask '{task_name}' has been deleted.")
                 break
             else:
-                print(f"{Fore.RED}\nTask not found. Please enter a valid task name (or enter 'cancel' to cancel):\n{Style.RESET_ALL}")
-    
+                print(f"{Fore.RED}\nTask not found. Please enter a valid task "
+                      f"name (or enter 'cancel' to cancel):\n"
+                      f"{Style.RESET_ALL}")
+
     except ValueError as e:
         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
@@ -328,11 +362,11 @@ def exit_program():
 
 # Dictionary of menu options and corresponding functions
 MENU_OPTIONS = [
-    ('Show tasks', lambda: show_tasks('tasks')),
-    ('New task', new_task),
-    ('Complete task', complete_task),
-    ('Delete task', delete_task),
-    ('Exit', exit_program)
+    ("Show tasks", lambda: show_tasks("tasks")),
+    ("New task", new_task),
+    ("Complete task", complete_task),
+    ("Delete task", delete_task),
+    ("Exit", exit_program)
 ]
 
 

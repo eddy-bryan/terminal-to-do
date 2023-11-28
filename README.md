@@ -151,10 +151,10 @@ I have diligently tested the Terminal To Do project to identify and address pote
 
 No remaining bugs have been identified after thorough testing and bug fixing.
 
-<!-- ## Validator Testing
+## Validator Testing
 
 - PEP8
-    - No errors were returned from PEP8online.com, confirming the code's compliance with PEP8 style guidelines. -->
+    - No errors were returned from PEP8online.com, confirming the code's compliance with PEP8 style guidelines.
 
 # Deployment
 
