@@ -25,17 +25,23 @@ def display_menu():
     print("Welcome to Terminal To Do!")
 
     while True:
+        # Display the menu options
         print("_" * 80 + "\n")
         print("Main menu:")
+
+        # Enumerate through MENU_OPTIONS and display each option
         for i, (option, _) in enumerate(MENU_OPTIONS, start=1):
             print(f"{i}. {option}")
         print("_" * 80 + "\n")
 
         try:
+            # Get user input for action selection
             action_num = int(input("Select the number of the action you would "
                                    "like to perform:\n"))
 
+            # Check if the entered action number is valid
             if 1 <= action_num <= len(MENU_OPTIONS):
+                # Execute the selected action
                 action = MENU_OPTIONS[action_num - 1][1]
                 print(f"\nYou selected '{MENU_OPTIONS[action_num - 1][0]}'.")
                 action()
@@ -356,6 +362,9 @@ def delete_task():
 
 
 def exit_program():
+    """
+    Simple function to terminate the program
+    """
     print("\nExiting program...")
     sys.exit()
 
