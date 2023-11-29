@@ -81,7 +81,7 @@ def show_tasks(page):
             print(f"Description: {task[1]}\n")
             print(f"Due Date: {task[2]}")
     except ValueError as e:
-        print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
+        print(f"\n{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
 
 def is_valid_date(date_str):
@@ -120,7 +120,7 @@ def new_task():
             print("Task creation canceled.")
             return
         elif not task_name or task_name.isspace():
-            print(f"{Fore.RED}Error: Task name cannot be empty."
+            print(f"\n{Fore.RED}Error: Task name cannot be empty."
                   f"{Style.RESET_ALL}")
             continue
 
@@ -134,7 +134,7 @@ def new_task():
                 break
 
         if task_exists:
-            print(f"{Fore.RED}Task with the same name already exists."
+            print(f"\n{Fore.RED}Task with the same name already exists."
                   f"{Style.RESET_ALL}")
             continue
 
@@ -157,7 +157,7 @@ def new_task():
             break
 
         except ValueError as e:
-            print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
+            print(f"\n{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
     while True:
         try:
@@ -178,7 +178,7 @@ def new_task():
             break
 
         except ValueError as e:
-            print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
+            print(f"\n{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
     print("\nUpdating tasks worksheet...")
 
@@ -212,7 +212,7 @@ def get_task_details(worksheet, task_name):
             if task_details is not None:
                 return task_details
             else:
-                raise ValueError(f"{Fore.RED}\nTask not found. Please enter a "
+                raise ValueError(f"{Fore.RED}Task not found. Please enter a "
                                  f"valid task name (or enter 'cancel' to "
                                  f"cancel):{Style.RESET_ALL}")
 
@@ -319,11 +319,11 @@ def delete_task():
                 print("Task deletion canceled.")
                 return
             else:
-                raise ValueError(f"{Fore.RED}\nSelection invalid, please "
+                raise ValueError(f"{Fore.RED}Selection invalid, please "
                                  f"choose a valid worksheet number or enter "
-                                 f"'cancel'.\n{Style.RESET_ALL}")
+                                 f"'cancel'.{Style.RESET_ALL}")
         except ValueError as e:
-            print(f"{Fore.RED}\nError: {e}\n{Style.RESET_ALL}")
+            print(f"\n{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
     while True:
         show_tasks(page)
@@ -359,7 +359,7 @@ def delete_task():
             print(f"\nTask '{task_name}' has been deleted.")
             break
         else:
-            print(f"{Fore.RED}\nTask not found. Please enter a valid task "
+            print(f"\n{Fore.RED}Task not found. Please enter a valid task "
                   f"name (or enter 'cancel' to cancel):\n"
                   f"{Style.RESET_ALL}")
 
