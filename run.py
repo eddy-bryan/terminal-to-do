@@ -288,79 +288,6 @@ def complete_task():
         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
 
-# def delete_task():
-#     """
-#     This function prompts the user to select whether they want to delete a
-#     task from the 'tasks' or 'completed_tasks' worksheet. It then displays
-#     the list of tasks from the selected worksheet and prompts the user to
-#     enter the name of the task they want to delete. If the task is found, it
-#     is deleted from the worksheet.
-#     """
-#     try:
-#         # Ask which worksheet the user wants to delete from
-#         while True:
-#             selection = input("\nWould you like to delete from the 'Tasks' or "
-#                               "'Completed Tasks' list (or enter 'cancel' to "
-#                               "cancel):\n")
-
-#             # Check if the user wants to cancel task deletion
-#             if selection.lower() == "cancel":
-#                 print("Task deletion canceled.")
-#                 return
-#             elif selection.lower() == "tasks":
-#                 worksheet = SHEET.worksheet("tasks")
-#                 break
-#             elif selection.lower() == "completed tasks":
-#                 worksheet = SHEET.worksheet("completed_tasks")
-#                 break
-#             else:
-#                 print(f"{Fore.RED}\nSelection invalid, please choose either "
-#                       f"the 'Tasks' or 'Completed Tasks' list (or enter "
-#                       f"'cancel' to cancel):\n{Style.RESET_ALL}")
-
-#         while True:
-#             show_tasks(selection.lower().replace(" ", "_"))
-
-#             all_values = worksheet.get_all_values()
-
-#             print("_" * 80 + "\n")
-#             # Get the task name to delete from the user
-#             task_name = input("Enter the name of the task you would like to "
-#                               "delete (or enter 'cancel' to cancel):\n")
-
-#             # Check if the user wants to cancel task deletion
-#             if task_name.lower() == "cancel":
-#                 print("Task deletion canceled.")
-#                 return
-
-#             task_found = False
-
-#             # Find the task in the worksheet
-#             for i in range(1, len(all_values)):
-#                 if all_values[i][0].lower() == task_name.lower():
-#                     task_found = True
-#                     row_to_delete = i + 1
-#                     break
-
-#             if task_found:
-#                 print(f"\nUpdating {worksheet.title.capitalize()} "
-#                       f"worksheet...")
-#                 # Delete the task from the worksheet
-#                 worksheet.delete_rows(row_to_delete)
-#                 print(f"{worksheet.title.capitalize()} worksheet updated "
-#                       f"successfully.")
-
-#                 print(f"\nTask '{task_name}' has been deleted.")
-#                 break
-#             else:
-#                 print(f"{Fore.RED}\nTask not found. Please enter a valid task "
-#                       f"name (or enter 'cancel' to cancel):\n"
-#                       f"{Style.RESET_ALL}")
-
-#     except ValueError as e:
-#         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
-
-
 def delete_task():
     """
     This function prompts the user to select whether they want to delete a
@@ -374,27 +301,32 @@ def delete_task():
         print("1. Tasks")
         print("2. Completed Tasks")
         try:
-            selection = int(input("\nSelect a worksheet number that you would "
-                                  "like to delete from:\n"))
+            selection = input("\nSelect a worksheet number that you would "
+                              "like to delete from (or enter 'cancel' to "
+                              "cancel):\n")
 
-            if selection == 1:
+            if selection == '1':
                 worksheet = SHEET.worksheet("tasks")
                 page = "tasks"
+                print("You selected 'Tasks'.")
                 break
-            elif selection == 2:
+            elif selection == '2':
                 worksheet = SHEET.worksheet("completed_tasks")
                 page = "completed_tasks"
+                print("You selected 'Completed Tasks'.")
                 break
+            elif selection.lower() == "cancel":
+                print("Task deletion canceled.")
+                return
             else:
-                print(f"{Fore.RED}\nSelection invalid, please choose a valid "
-                      f"worksheet number.\n{Style.RESET_ALL}")
-        except ValueError:
-            print(f"{Fore.RED}\nInvalid input. Please enter a number."
-                  f"{Style.RESET_ALL}")
+                raise ValueError(f"{Fore.RED}\nSelection invalid, please "
+                                 f"choose a valid worksheet number or enter "
+                                 f"'cancel'.\n{Style.RESET_ALL}")
+        except ValueError as e:
+            print(f"{Fore.RED}\nError: {e}\n{Style.RESET_ALL}")
 
     while True:
         show_tasks(page)
-
         all_values = worksheet.get_all_values()
 
         print("_" * 80 + "\n")
