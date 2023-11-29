@@ -281,8 +281,7 @@ def complete_task():
                 break
             else:
                 print(f"{Fore.RED}\nTask not found. Please enter a valid task "
-                      f"name (or enter 'cancel' to cancel):\n"
-                      f"{Style.RESET_ALL}")
+                      f"name.{Style.RESET_ALL}")
 
     except ValueError as e:
         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
@@ -320,8 +319,8 @@ def delete_task():
                 return
             else:
                 raise ValueError(f"{Fore.RED}Selection invalid, please "
-                                 f"choose a valid worksheet number or enter "
-                                 f"'cancel'.{Style.RESET_ALL}")
+                                 f"choose a valid worksheet number."
+                                 f"{Style.RESET_ALL}")
         except ValueError as e:
             print(f"\n{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
@@ -360,7 +359,7 @@ def delete_task():
             break
         else:
             print(f"\n{Fore.RED}Task not found. Please enter a valid task "
-                  f"name (or enter 'cancel' to cancel):\n"
+                  f"name."
                   f"{Style.RESET_ALL}")
 
 

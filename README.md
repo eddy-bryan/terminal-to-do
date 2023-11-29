@@ -73,6 +73,7 @@ This application empowers you to showcase an entire task list, generate new task
 ### Delete Task
 
 - Option 4, "Delete Task", prompts users to select the task sheet ('tasks' or 'completed_tasks') and enter the task name for deletion.
+- Numbered options are used here similarly to the main menu to further minimize user input errors.
 
 ![Delete Task 1](assets/images/delete_task1.png)
 
