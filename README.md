@@ -17,6 +17,7 @@ The Terminal To Do app is a command-line task manager designed for simplicity an
     * [Remaining Bugs](#remaining-bugs)
     * [Validator Testing](#validator-testing)
 * [Deployment](#deployment)
+    * [Deployment Steps](#deployment-steps)
 * [Credits](#credits)
 
 # How To Use
@@ -180,7 +181,11 @@ No remaining bugs have been identified after thorough testing and bug fixing.
 
 Code Institute's mock terminal for Heroku has been used to deploy this project.
 
-### Deployment Steps:
+## Deployment Steps
+
+For a detailed guide covering all of the steps to create and link your own task management spreadsheet, see the [Setup Guide](setup_guide.md) document within this repository.
+
+### Heroku Deployment
 
 - Clone this repository
 - Create a new app on Heroku
