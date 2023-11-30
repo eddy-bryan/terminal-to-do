@@ -5,6 +5,20 @@ The Terminal To Do app is a command-line task manager designed for simplicity an
 
 ![Responsive Design Screenshot](assets/images/responsive.png)
 
+# Table of Contents
+
+* [How To Use](#how-to-use)
+* [Features](#features)
+    * [Existing Features](#existing-features)
+    * [Future Features](#future-features)
+* [Data Model](#data-model)
+* [Testing](#testing)
+    * [Resolved Bugs](#resolved-bugs)
+    * [Remaining Bugs](#remaining-bugs)
+    * [Validator Testing](#validator-testing)
+* [Deployment](#deployment)
+* [Credits](#credits)
+
 # How To Use
 
 Terminal To Do is smoothly integrated with Google Sheets to streamline task tracking. Refer to the [Setup Guide](setup_guide.md) for detailed instructions on configuring your personalized task management spreadsheet.
